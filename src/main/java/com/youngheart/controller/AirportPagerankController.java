@@ -3,6 +3,7 @@ package com.youngheart.controller;
 import com.youngheart.domain.vo.time.AirportPagerankVO;
 import com.youngheart.domain.vo.time.FlightRouteDensityStatsVO;
 import com.youngheart.domain.vo.time.FlightTimeSlotStatsVO;
+import com.youngheart.domain.vo.time.TimeResult;
 import com.youngheart.service.AirportPagerankService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController // This annotation combines @Controller and @ResponseBody
-@RequestMapping("/airport-importance") // Changed path for clarity
+@RequestMapping("/time") // Changed path for clarity
 public class AirportPagerankController {
 
     private final AirportPagerankService airportPagerankService;
@@ -39,17 +40,13 @@ public class AirportPagerankController {
      * }
      * ]
      */
-    @GetMapping("/vital")
-    public List<AirportPagerankVO> getAllAirportPagerank() {
-        return airportPagerankService.getAllAirportPagerank();
-    }
-    @GetMapping("/trend")
-    public List<FlightTimeSlotStatsVO> findAllFlightTimeSlotStats(){
-        return airportPagerankService.findAllFlightTimeSlotStats();
-    }
-    @GetMapping("/compet")
-    public List<FlightRouteDensityStatsVO> findAllFlightRouteDensityStats(String route){
-        return airportPagerankService.findByRoute();
+    @GetMapping
+    public TimeResult timeResult(){
+        TimeResult timeResult = new TimeResult(airportPagerankService.getAllAirportPagerank(),
+                airportPagerankService.findAllFlightTimeSlotStats(),
+                airportPagerankService.findByRoute());
+        System.out.println(timeResult);
+        return timeResult;
     }
 
 }
