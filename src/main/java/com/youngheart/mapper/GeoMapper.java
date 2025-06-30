@@ -1,6 +1,7 @@
 package com.youngheart.mapper;
 
 import com.youngheart.domain.vo.flight.ArrVO;
+import com.youngheart.domain.vo.flight.LandVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -12,4 +13,8 @@ public interface GeoMapper {
             "FROM airport_dep_num " +
             "GROUP BY airport_name")
     List<ArrVO> getArrCount();
+    @Select("SELECT airport_name as airportName, SUM(flight_count) as flightCount " +
+            "FROM airport_landing_num " +
+            "GROUP BY airport_name")
+    List<LandVO> getLandCount();
 }

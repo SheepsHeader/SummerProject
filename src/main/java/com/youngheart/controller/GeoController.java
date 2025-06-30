@@ -2,6 +2,7 @@ package com.youngheart.controller;
 
 import com.youngheart.domain.Result;
 import com.youngheart.domain.vo.flight.ArrVO;
+import com.youngheart.domain.vo.flight.LandVO;
 import com.youngheart.service.GeoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,9 +18,12 @@ public class GeoController {
     @Autowired
     private GeoService geoService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Result<List<ArrVO>> getArrCount(){
-        List<ArrVO> data = geoService.getArrCount();
-        return Result.ok(data);
+    @GetMapping("/dep")
+    public List<ArrVO>getArrCount(){
+        return geoService.getArrCount();
+    }
+    @GetMapping("/land")
+    public List<LandVO>getLandCount(){
+        return geoService.getLandCount();
     }
 }

@@ -1,13 +1,11 @@
 package com.youngheart.domain.vo.flight;
 
-import lombok.Data;
 
-
-public class ArrVO {
+public class LandVO {
     private String airportName;
     private Integer flightCount;
 
-    public ArrVO(String airportName, Integer flightCount) {
+    public LandVO(String airportName, Integer flightCount) {
         this.airportName = airportName;
         this.flightCount = flightCount;
     }
