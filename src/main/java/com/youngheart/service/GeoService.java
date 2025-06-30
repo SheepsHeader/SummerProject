@@ -1,11 +1,9 @@
 package com.youngheart.service;
 
+import com.youngheart.domain.vo.flight.ArrVO;
 
-
-import com.youngheart.domain.Result;
-
+import java.util.List;
 
 public interface GeoService {
-   public Result depCount();
+    List<ArrVO> getArrCount();
 }
-

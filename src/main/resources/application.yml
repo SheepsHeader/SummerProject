@@ -8,9 +8,7 @@ spring:
     username: root
     password: root
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.youngheart.domain
   configuration:
-    #开启驼峰命名
-    map-underscore-to-camel-case: true
 
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据获取网页</title>
+    <style>
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        #dataDisplay {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            min-height: 200px;
+            white-space: pre-wrap;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="#" id="coreBtn">核心</a>
+    <a href="#" id="marketBtn">市场</a>
+    <a href="#" id="geoBtn">地理</a>
+    <a href="#" id="timeBtn">时间</a>
+</nav>
+<div id="dataDisplay">点击导航栏按钮获取数据</div>
+
+<script>
+    // 获取DOM元素
+    const coreBtn = document.getElementById('coreBtn');
+    const marketBtn = document.getElementById('marketBtn');
+    const geoBtn = document.getElementById('geoBtn');
+    const timeBtn = document.getElementById('timeBtn');
+    const dataDisplay = document.getElementById('dataDisplay');
+
+    // 通用数据显示函数
+    function displayData(data) {
+        dataDisplay.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+    }
+
+    // 错误处理函数
+    function handleError(error) {
+        console.error('Error:', error);
+        dataDisplay.innerHTML = `<p style="color: red;">获取数据失败，请检查服务是否正常运行。</p>`;
+    }
+
+    // 核心数据请求
+    coreBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('http://localhost:8080/core')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态码: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => displayData(data))
+            .catch(handleError);
+    });
+
+    // 市场数据请求
+    marketBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('http://localhost:8080/market')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态码: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => displayData(data))
+            .catch(handleError);
+    });
+
+    // 地理数据请求
+    geoBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('http://localhost:8080/geo')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态码: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => displayData(data))
+            .catch(handleError);
+    });
+
+    // 时间数据请求
+    timeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('http://localhost:8080/time')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态码: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => displayData(data))
+            .catch(handleError);
+    });
+</script>
+</body>
+</html>
