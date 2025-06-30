@@ -4,9 +4,9 @@ spring:
   #mysql连接配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/plane_info
+    url: jdbc:mysql://localhost:3306/fdata?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
-    password: 1234
+    password: root
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.youngheart.domain
