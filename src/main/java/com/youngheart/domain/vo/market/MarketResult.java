@@ -10,21 +10,34 @@ public class MarketResult {
     private List<CityCountVO> cityCountVO;
     private List<AirportCountVO> airportCountVO;
 
-    public MarketResult(List<AirlineCountVO> airlineVO, List<CityCountVO> cityCountVO, List<AirportCountVO> airportCountVO) {
-        this.airlineCountVO = airlineVO;
+    private List<Top5VO> top5VO;
+    private List<PosCountVO> posCountVO;
+
+
+    public MarketResult(List<AirlineCountVO> airlineCountVO, List<CityCountVO> cityCountVO, List<AirportCountVO> airportCountVO, List<Top5VO> top5VO, List<PosCountVO> posCountVO) {
+        this.airlineCountVO = airlineCountVO;
         this.cityCountVO = cityCountVO;
         this.airportCountVO = airportCountVO;
+        this.top5VO = top5VO;
+        this.posCountVO = posCountVO;
     }
 
     public MarketResult() {
     }
 
-    public List<AirlineCountVO> getAirlineVO() {
+    public MarketResult(List<AirlineCountVO> airlineCountVO, List<CityCountVO> cityCountVO, List<AirportCountVO> airportCountVO, List<Top5VO> top5VO) {
+        this.airlineCountVO = airlineCountVO;
+        this.cityCountVO = cityCountVO;
+        this.airportCountVO = airportCountVO;
+        this.top5VO = top5VO;
+    }
+
+    public List<AirlineCountVO> getAirlineCountVO() {
         return airlineCountVO;
     }
 
-    public void setAirlineVO(List<AirlineCountVO> airlineVO) {
-        this.airlineCountVO = airlineVO;
+    public void setAirlineCountVO(List<AirlineCountVO> airlineCountVO) {
+        this.airlineCountVO = airlineCountVO;
     }
 
     public List<CityCountVO> getCityCountVO() {
@@ -41,5 +54,21 @@ public class MarketResult {
 
     public void setAirportCountVO(List<AirportCountVO> airportCountVO) {
         this.airportCountVO = airportCountVO;
+    }
+
+    public List<Top5VO> getTop5VO() {
+        return top5VO;
+    }
+
+    public void setTop5VO(List<Top5VO> top5VO) {
+        this.top5VO = top5VO;
+    }
+
+    public List<PosCountVO> getPosCountVO() {
+        return posCountVO;
+    }
+
+    public void setPosCountVO(List<PosCountVO> posCountVO) {
+        this.posCountVO = posCountVO;
     }
 }

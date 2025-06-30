@@ -4,4 +4,58 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.youngheart.mapper.MarketMapper">
 
+    <select id="getPosCount" resultType="com.youngheart.domain.vo.market.PosCountVO">
+        WITH DepartureStats AS (
+            SELECT
+                dep_city AS city,
+                dep_lat AS lat,
+                dep_lng AS lng,
+                COUNT(*) AS dep_count
+            FROM
+                flight_data
+            GROUP BY
+                dep_city,
+                dep_lat,
+                dep_lng
+        ),ArrivalStats AS (
+            SELECT
+                arr_city AS city,
+                arr_lat AS lat,
+                arr_lng AS lng,
+                COUNT(*) AS arr_count
+            FROM
+                flight_data
+            GROUP BY
+                arr_city,
+                arr_lat,
+                arr_lng
+        )
+        SELECT
+            COALESCE(ds.city, as_.city) AS city,
+            COALESCE(ds.lat, as_.lat) AS lat,
+            COALESCE(ds.lng, as_.lng) AS lng,
+            COALESCE(ds.dep_count, 0) AS dep_count,
+            COALESCE(as_.arr_count, 0) AS arr_count
+        FROM
+            DepartureStats ds
+                LEFT JOIN
+            ArrivalStats as_
+            ON
+                ds.city = as_.city AND ds.lat = as_.lat AND ds.lng = as_.lng
+        UNION
+        SELECT
+            COALESCE(ds.city, as_.city) AS city,
+            COALESCE(ds.lat, as_.lat) AS lat,
+            COALESCE(ds.lng, as_.lng) AS lng,
+            COALESCE(ds.dep_count, 0) AS dep_count,
+            COALESCE(as_.arr_count, 0) AS arr_count
+        FROM
+            ArrivalStats as_
+                LEFT JOIN
+            DepartureStats ds
+            ON
+                ds.city = as_.city AND ds.lat = as_.lat AND ds.lng = as_.lng
+        WHERE
+            ds.city IS NULL;
+    </select>
 </mapper>

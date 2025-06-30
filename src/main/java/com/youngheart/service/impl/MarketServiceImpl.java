@@ -15,9 +15,11 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public MarketResult getMarketResult() {
         MarketResult marketResult = new MarketResult();
-        marketResult.setAirlineVO(marketMapper.getAirlineCount());
+        marketResult.setAirlineCountVO(marketMapper.getAirlineCount());
         marketResult.setCityCountVO(marketMapper.getCityCount());
         marketResult.setAirportCountVO(marketMapper.getAirportCount());
+        marketResult.setTop5VO(marketMapper.getTop5());
+        marketResult.setPosCountVO(marketMapper.getPosCount());
         return marketResult;
     }
 }
